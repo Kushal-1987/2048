@@ -150,7 +150,7 @@ for episode in range(1000):
 torch.save({
     'model_state_dict': model.state_dict(),
     'optimizer_state_dict': optimizer.state_dict(),
-    'episode': current_episode,
+    # 'episode': current_episode,
     'epsilon': epsilon,
 }, 'checkpoint.pth')
                                      
