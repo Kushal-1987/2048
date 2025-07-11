@@ -88,7 +88,7 @@ for episode in range(1000):
                 q_values = model(state).squeeze()
                 for m in range(4):
                     if m not in valid_moves:
-                        q_values[m] = -float('inf')  # mask invalid moves
+                        q_values[m] = -float('inf') 
                 action = torch.argmax(q_values).item()
     
         move(board, action, score)
@@ -102,7 +102,7 @@ for episode in range(1000):
         if len(memory)>=1000:
             memory.popleft()
         if done:
-            print(f"Episode {episode}, Score: {score[0]}, Max Tile: {board.max()}")
+            print(f"Episode {episode}, Score: {score[0]}, Max Tile: {board.max()}, Epsilon: {epsilon}")
             scores.append(score[0])
             max_tiles.append(board.max())
             moves.append(no_moves)
@@ -143,10 +143,17 @@ for episode in range(1000):
     loss.backward()
     optimizer.step()
 
-    if episode % 10 == 0:
+    if episode % 5 == 0:
         target_model.load_state_dict(model.state_dict())
     epsilon = max(min_epsilon, epsilon * decay)
-                                                   
+
+torch.save({
+    'model_state_dict': model.state_dict(),
+    'optimizer_state_dict': optimizer.state_dict(),
+    'episode': current_episode,
+    'epsilon': epsilon,
+}, 'checkpoint.pth')
+                                     
 fig, axs = plt.subplots(1, 3, figsize=(12, 5))  
 
 axs[0].plot(max_tiles, marker='o')
