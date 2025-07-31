@@ -3,6 +3,43 @@
 This repository documents the first three weeks of an 8‑week project to build an AI agent that can play **2048**, using reinforcement learning and neural networks.
 
 ---
+## Problem Statement
+
+2048 is a popular single-player puzzle game in which players combine tiles with matching values to reach the 2048 tile. Despite its simple interface, it involves strategic decision-making and randomness, making it a good candidate for reinforcement learning.
+
+The objective of this project is to create an intelligent agent that can consistently win the game by reaching at least the 2048 tile, or higher (such as 4096 or 8192), using AI and ML techniques.
+
+**Goal:** Design and compare two AI agents using (1) n-Tuple networks and (2) Deep Q-Learning to play 2048 effectively.
+
+## Proposed Solutions
+
+### 1. n-Tuple Network
+
+The n-Tuple network is a feature-based function approximation technique that uses predefined patterns (tuples) of board positions to evaluate a state.
+
+- The 4x4 game board is divided into overlapping tuples such as rows, columns, or shapes.
+- Each tuple has a lookup table (LUT) to store the value for specific tile combinations.
+- The value of the board is the sum of values from all active tuples.
+- The tables are updated using Temporal Difference (TD) learning, such as TD(0).
+- This method is fast and interpretable, requiring low computational resources.
+
+### 2. Deep Q-Learning (DQN)
+
+Deep Q-Learning uses a neural network to approximate the Q-function, which estimates the expected future reward for each action.
+
+- The board is encoded as a matrix input, and the actions are: up, down, left, and right.
+- The network learns Q-values `Q(s, a)` using the Bellman equation.
+- Experience Replay and Target Networks are used to stabilize training.
+- An ε-greedy policy is used to balance exploration and exploitation.
+- With enough training, the model can learn complex strategies and reach very high tiles.
+
+## Expected Outcomes
+
+- A trained n-Tuple agent that plays the game quickly and consistently.
+- A Deep Q-Learning agent that improves over episodes and learns high-reward strategies.
+- Evaluation based on average score, win rate, and maximum tile achieved.
+
+---
 
 ## Week 1: Reinforcement Learning Foundations  
 **Goal:** Establish a solid understanding of RL concepts and their mathematical foundations.
